@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FA survey</title>
+</head>
+
+<body div style="padding-left: 40px;">
+    <h2> FA survey</h2>
+    <p>"Certain foods" means any food whose sugar/carbohydrate content is ridiculous.</p>
+   
+        <div id="quiz" style="padding-top: 30px;"></div>
+        <br />
+        <button id="submit" >Get Results</button>
+        <br />
+        <div id="results" style="padding-top: 20px; padding-bottom: 30px;">Your results will be displayed here.</div>
+</body>
+
+<script>
+
+    var myQuestions = [
+        {
+            question: "Question 1. When I started to eat certain foods, I ate much more than planned.",
+            category: 0,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'g'
+        },
+        {
+            question: "Question 2. I continued to eat certain foods even though I was no longer hungry.",
+            category: 0,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'g'
+        },
+        {
+            question: "Question 3. I ate to the point where I felt physically ill.",
+            category: 0,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'd'
+        },
+        {
+            question: "Question 4. I worried a lot about cutting down on certain types of food, but I ate them anyways.",
+            category: 1,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'g'
+        },
+        {
+            question: "Question 5. I really wanted to cut down on or stop eating certain kinds of foods, but I just couldn’t.",
+            category: 1,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'g'
+        },
+        {
+            question: "Question 6. I tried to cut down on or not eat certain kinds of food, but I wasn’t successful.",
+            category: 1,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'e'
+        },
+        {
+            question: "Question 7. I tried and failed to cut down on or stop eating certain foods.",
+            category: 1,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'e'
+        },
+        {
+            question: "Question 8. I spent a lot of time feeling sluggish or tired from overeating.",
+            category: 2,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'e'
+        },
+        {
+            question: "Question 9. I spent a lot of time eating certain foods throughout the day.",
+            category: 2,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'g'
+        },
+        {
+            question: "Question 10. When certain foods were not available, I went out of my way to get them. For example, I went to the store to get certain foods even though I had other things to eat at home.",
+            category: 2,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'e'
+        },
+        {
+            question: "Question 11. I ate certain foods so often or in such large amounts that I stopped doing other important things. These things may have been working or spending time with family or friends.",
+            category: 3,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'c'
+        },
+        {
+            question: "Question 12. I avoided work, school or social activities because I was afraid I would overeat there.",
+            category: 3,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "Question 13. I felt so bad about overeating that I didn’t do other important things. These things may have been working or spending time with family or friends.",
+            category: 3,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'c'
+        },
+        {
+            question: "Question 14. I avoided work, school or social functions because I could not eat certain foods there.",
+            category: 3,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'c'
+        },
+        {
+            question: "Question 15. I kept eating in the same way even though my eating caused emotional problems.",
+            category: 4,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'd'
+        },
+        {
+            question: "Question 16. I kept eating the same way even though my eating caused physical problems.",
+            category: 4,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'e'
+        },
+        {
+            question: "Question 17. Eating the same amount of food did not give me as much enjoyment as it used to.",
+            category: 5,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'e'
+        },
+        {
+            question: "Question 18. I avoided work, school or social functions because I could not eat certain foods there.",
+            category: 5,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'c'
+        },
+        {
+            question: "Question 19. When I cut down on or stopped eating certain foods, I felt irritable, nervous or sad.",
+            category: 6,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'd'
+        },
+        {
+            question: "Question 20. If I had physical symptoms because I hadn’t eaten certain foods, I would eat those foods to feel better.",
+            category: 6,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'e'
+        },
+        {
+            question: "Question 21. If I had emotional problems because I hadn’t eaten certain foods, I would eat those foods to feel better.",
+            category: 6,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'd'
+        },
+        {
+            question: "Question 22. When I cut down on or stopped eating certain foods, I had physical symptoms. For example, I had headaches or fatigue.",
+            category: 6,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'd'
+        },
+        {
+            question: "Question 23. When I cut down or stopped eating certain foods, I had strong cravings for them.",
+            category: 6,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'f'
+        },
+        {
+            question: "Question 24. I had problems with my family or friends because of how much I overate.",
+            category: 7,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "Question 25. I avoided social situations because people wouldn’t approve of how much I ate.",
+            category: 7,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'c'
+        },
+        {
+            question: "Question 26. My friends or family were worried about how much I overate.",
+            category: 7,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "Question 27. I ate to the point where I felt physically ill.",
+            category: 8,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "Question 28. I didn’t do well at work or school because I was eating too much.",
+            category: 8,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "Question 29. I kept eating certain foods even though I knew it was physically dangerous. For example, I kept eating sweets even though I had diabetes. Or I kept eating fatty foods despite having heart disease.",
+            category: 9,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'd'
+        },
+        {
+            question: "Question 30. I was so distracted by eating that I could have been hurt (e.g., when driving a car, crossing the street, operating machinery).",
+            category: 9,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "Question 31. I was so distracted by thinking about food that I could have been hurt (e.g., when driving a car, crossing the street, operating machinery).",
+            category: 9,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "Question 32. I had such strong urges to eat certain foods that I couldn’t think of anything else.",
+            category: 10,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'd'
+        },
+        {
+            question: "Question 33. I had such intense cravings for certain foods that I felt like I had to eat them right away.",
+            category: 10,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'e'
+        },
+        {
+            question: "Question 34. My eating behavior caused me a lot of distress.",
+            category: 11,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'e'
+        },
+        {
+            question: "Question 35. I had significant problems in my life because of food and eating. These may have been problems with my daily routine, work, school, friends, family, or health.",
+            category: 11,
+            answers: {
+                a: 'Never',
+                b: 'Less than monthly',
+                c: 'Once a month',
+                d: 'Two to three times a month',
+                e: 'Once a week',
+                f: 'Two to three times a week',
+                g: 'Four to six times a week',
+                h: 'Every day'
+            },
+            correctAnswer: 'e'
+        }
+    ];
+    
+    function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
+
+        function showQuestions(questions, quizContainer){
+            // we'll need a place to store the output and the answer choices
+            var output = [];
+            var answers;
+
+            // for each question...
+            for(var i=0; i<questions.length; i++){
+                
+                // first reset the list of answers
+                answers = [];
+
+                // for each available answer to this question...
+                for(letter in questions[i].answers){
+
+                    // ...add an html radio button
+                    answers.push(
+                        '<label>'
+                            + '<input type="radio" name="question'+i+'" value="'+letter+'">'
+                         //   + letter + ': '
+                            + " " + questions[i].answers[letter]
+                        + '</label>'
+                        +  '<br />'
+                    );
+                }
+
+                // add this question and its answers to the output
+                output.push(
+                    '<div class="question">' + questions[i].question + '</div>' 
+                    + '<div class="answers">' + answers.join('') + '</div>'+ '<br />'
+                );
+            }
+
+            // finally combine our output list into one string of html and put it on the page
+            quizContainer.innerHTML = output.join('');
+    }
+
+
+        function showResults(questions, quizContainer, resultsContainer){
+	
+            // gather answer containers from our quiz
+            var answerContainers = quizContainer.querySelectorAll('.answers');
+            
+            // keep track of user's answers
+            var userAnswer = '';
+            var checked;
+            var finalScore = [];
+            
+            // for each question...
+            for(var i=0; i<questions.length; i++){
+            
+                //turn unanswered questions purple
+                checked = (answerContainers[i].querySelector('input[name=question'+i+']:checked'));
+
+                if (!checked){
+                    answerContainers[i].style.color = 'purple';
+                 }
+
+                userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
+
+                if(userAnswer >= questions[i].correctAnswer){
+
+                   //collect a point for each category with answer >= threshold answer value 
+                    finalScore[questions[i].category]=1;
+                    
+                }
+
+            }
+
+            // show number of correct answers out of total
+            var fs = finalScore.reduce(function(a,b){return a+b});
+
+            // ///TODO given range of score, give dignosis, concat into string
+            if (fs <= 1)
+            {
+                var resulto = "No Food Addiction = 1 or fewer symptoms. Does not meet criteria for clinical significance.";
+            }
+            else if ((fs >= 2) && (fs < 4))
+            {
+                var resulto = "Mild Food Addiction = 2 or 3 symptoms and clinical significance.";
+            }
+            else if ((fs >= 4) && (fs <= 5))
+            {
+                var resulto = "Moderate Food Addiction = 4 or 5 symptoms and clinical significance";
+            }
+            else if (fs > 5)
+            {
+                var resulto = "Severe Food Addiction = 6 or more symptoms and clinical significance";
+            }
+
+            //resultsContainer.innerHTML = ' out of ' + questions.length + "  yo: " + fs;
+            resultsContainer.innerHTML = ' Final score: ' + fs + "  " + resulto;
+        }
+
+        // show the questions
+        showQuestions(questions, quizContainer);
+
+        // when user clicks submit, show results
+        submitButton.onclick = function(){
+            showResults(questions, quizContainer, resultsContainer);
+        }
+    }
+
+    var quizContainer = document.getElementById('quiz');
+    var resultsContainer = document.getElementById('results');
+    var submitButton = document.getElementById('submit');
+
+    generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+
+</script>
+</html>
