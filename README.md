@@ -1,2 +1,2 @@
 # FAsurveyJS
-one-page JavaScript version of the survey - has rudimentary validation
+one-page JavaScript version of the survey - now with added validation!
